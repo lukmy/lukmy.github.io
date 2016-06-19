@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hubot 初步研究 | My Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Table of Contents
+
+
+1. &amp;#x521D;&amp;#x8877;
+2. &amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7528; Hubot
+3. &amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;&amp;#x53CA;&amp;#x53C2;&amp;#x8003;&amp;#x6750;&amp;#x6599;
+
+3.1. &amp;#x5982;&amp;#x4F55;&amp;#x642D;&amp;#x5EFA; Hu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hubot 初步研究">
+<meta property="og:url" content="http://yoursite.com/2016/06/17/my-hubot/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="Table of Contents
+
+
+1. &amp;#x521D;&amp;#x8877;
+2. &amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7528; Hubot
+3. &amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;&amp;#x53CA;&amp;#x53C2;&amp;#x8003;&amp;#x6750;&amp;#x6599;
+
+3.1. &amp;#x5982;&amp;#x4F55;&amp;#x642D;&amp;#x5EFA; Hu">
+<meta property="og:updated_time" content="2016-06-17T07:23:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hubot 初步研究">
+<meta name="twitter:description" content="Table of Contents
+
+
+1. &amp;#x521D;&amp;#x8877;
+2. &amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7528; Hubot
+3. &amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;&amp;#x53CA;&amp;#x53C2;&amp;#x8003;&amp;#x6750;&amp;#x6599;
+
+3.1. &amp;#x5982;&amp;#x4F55;&amp;#x642D;&amp;#x5EFA; Hu">
+  
+    <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">My Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-my-hubot" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/17/my-hubot/" class="article-date">
+  <time datetime="2016-06-17T03:00:00.000Z" itemprop="datePublished">2016-06-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/DevOPS/">DevOPS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hubot 初步研究
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. &#x521D;&#x8877;</a></li>
+<li><a href="#sec-2">2. &#x4E3A;&#x4EC0;&#x4E48;&#x7528; Hubot</a></li>
+<li><a href="#sec-3">3. &#x642D;&#x5EFA;&#x8FC7;&#x7A0B;&#x53CA;&#x53C2;&#x8003;&#x6750;&#x6599;</a>
+<ul>
+<li><a href="#sec-3-1">3.1. &#x5982;&#x4F55;&#x642D;&#x5EFA; Hubot</a></li>
+<li><a href="#sec-3-2">3.2. &#x652F;&#x6301;&#x300E;&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;&#x300F;</a></li>
+<li><a href="#sec-3-3">3.3. &#x5982;&#x4F55;&#x5728; Hubot &#x91CC;&#x4F7F;&#x7528; ES6</a></li>
+<li><a href="#sec-3-4">3.4. Case Bot &#x7684;&#x5386;&#x7A0B;</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. <span class="todo TODO">TODO</span> TODOs &#x548C;&#x6700;&#x8FD1;&#x7684;&#x5174;&#x8DA3;&#x70B9;</a></li>
+<li><a href="#sec-5">5. &#x4E00;&#x4E9B;&#x6709;&#x610F;&#x601D;&#x7684;&#x8D44;&#x6599;</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> &#x521D;&#x8877;</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li><a href="https://github.com/NARKOZ/hacker-scripts" target="_blank" rel="external">&#x4FC4;&#x7F57;&#x65AF;&#x7A0B;&#x5E8F;&#x5458;&#x7684;&#x81EA;&#x52A8;&#x5316;&#x751F;&#x6D3B;</a>
+</li>
+<li><a href="https://www.pagerduty.com/blog/what-is-chatops/" target="_blank" rel="external">ChatOps &#x7684;&#x5174;&#x8D77;</a>
+</li>
+<li>Case &#x7684;&#x5B9E;&#x9645;&#x9700;&#x8981;
+<ul class="org-ul">
+<li>Case &#x662F;&#x4E00;&#x4E2A;&#x6D89;&#x53CA;&#x5230;&#x65E5;&#x5E38;&#x53D1;&#x5E03;&#x8FD0;&#x7EF4;&#x53CA; TS &#x7684;&#x9879;&#x76EE;&#xFF0C;&#x53D7;&#x4F17;&#x5BF9;&#x8C61;&#x4E0D;&#x4EC5;&#x5305;&#x542B; OPS&#xFF0C;&#x8FD8;&#x6709;&#x5BF9;&#x6280;&#x672F;&#x4E0D;&#x662F;&#x592A;&#x719F;&#x6089;&#x7684; TS&#xFF0C;&#x5F00;&#x653E; API &#x6765;&#x8C03;&#x7528;&#x4E0D;&#x592A;&#x73B0;&#x5B9E;&#xFF0C;&#x6545;&#x5F00;&#x59CB;&#x8003;&#x8651;&#x8FD0;&#x7EF4;&#x673A;&#x5668;&#x4EBA;&#x3002;
+</li>
+<li>&#x53E6;&#x5916; Case &#x6D89;&#x53CA;&#x5230;&#x7684;&#x64CD;&#x4F5C;&#x5927;&#x90E8;&#x5206;&#x90FD;&#x662F;&#x5F02;&#x6B65;&#x7684;&#xFF0C;&#x666E;&#x904D;&#x6D41;&#x7A0B;&#x4E3A; =&#x521B;&#x5EFA;&#x4EFB;&#x52A1;-&#x203A;&#x5F00;&#x59CB;&#x4EFB;&#x52A1;-&#x203A;&#x8F6E;&#x8BE2;&#x81F3;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;=&#xFF0C;&#x5728;&#x81EA;&#x5DF1;&#x65E5;&#x5E38;&#x8C03;&#x7528;&#x53CA;&#x8C03;&#x8BD5;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x6709;&#x70B9;&#x9EBB;&#x70E6;
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> &#x4E3A;&#x4EC0;&#x4E48;&#x7528; Hubot</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>GitHub &#x81EA;&#x7528;&#x5DE5;&#x5177;&#xFF0C;&#x7EF4;&#x62A4;&#x6BD4;&#x8F83;&#x6709;&#x4FDD;&#x8BC1;
+</li>
+<li><a href="https://github.com/github/hubot/blob/master/docs/adapters.md" target="_blank" rel="external">Adapter &#x6BD4;&#x8F83;&#x591A;</a>
+</li>
+<li>CoffeeScript &#x95E8;&#x69DB;&#x8F83;&#x4F4E;
+<ul class="org-ul">
+<li>CoffeeScript &#x8BED;&#x6CD5;&#x8F83;&#x6807;&#x51C6; JavaScript &#x6E05;&#x6670;&#x4E86;&#x5F88;&#x591A;&#xFF0C;&#x901A;&#x8FC7;&#x4E00;&#x4E9B;&#x9650;&#x5236;&#x907F;&#x514D;&#x4E86;&#x5F88;&#x591A; JavaScript &#x7684;&#x5751;&#x3002;
+</li>
+<li>&#x53E6;&#x5916;&#xFF0C;CoffeeScript &#x7684;&#x8BED;&#x6CD5;&#x548C; Ruby &#x5F88;&#x50CF;&#xFF0C;&#x5199;&#x8FC7; Ruby &#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x8FC1;&#x79FB;&#x6210;&#x672C;&#x8F83;&#x4F4E;&#x3002;
+</li>
+</ul>
+</li>
+<li>&#x5B9E;&#x73B0;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x5B9E;&#x5728;&#x4E0D;&#x884C;&#x7684;&#x8BDD;&#x53EF;&#x4EE5;&#x770B;&#x6E90;&#x7801;
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> &#x642D;&#x5EFA;&#x8FC7;&#x7A0B;&#x53CA;&#x53C2;&#x8003;&#x6750;&#x6599;</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> &#x5982;&#x4F55;&#x642D;&#x5EFA; Hubot</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Hubot &#x5B98;&#x65B9;&#x6587;&#x6863;
+<ul class="org-ul">
+<li><a href="https://hubot.github.com/docs/" target="_blank" rel="external">Hubot/Overview</a>
+</li>
+<li><a href="https://hubot.github.com/docs/scripting/" target="_blank" rel="external">Hubot/Scripting</a> 
+</li>
+</ul>
+</li>
+<li>&#x6BD4;&#x8F83;&#x6709;&#x7528;&#x7684;&#x63D2;&#x4EF6;
+<ul class="org-ul">
+<li><a href="https://github.com/vinta/hubot-reload-scripts" target="_blank" rel="external">Reload scripts without restarting Hubot</a>
+</li>
+</ul>
+</li>
+<li>&#x5B66;&#x4E60; CoffeeScript
+<ul class="org-ul">
+<li><a href="http://coffeescript.org/" target="_blank" rel="external">CoffeeScript &#x5B98;&#x7F51;</a>
+</li>
+<li><a href="http://amdgigabyte.github.io/library/coffeescript/index.html" target="_blank" rel="external">CoffeeScript &#x8896;&#x73CD;&#x624B;&#x518C;</a>
+</li>
+<li><a href="http://coffeescript-cookbook.github.io/" target="_blank" rel="external">CoffeeScript Cookbook</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> &#x652F;&#x6301;&#x300E;&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;&#x300F;</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li><a href="http://es6.ruanyifeng.com/#docs/async" target="_blank" rel="external">&#x962E;&#x4E00;&#x5CF0;&#x7684;&#x5206;&#x4EAB;: &#x5F02;&#x6B65;&#x64CD;&#x4F5C;&#x548C; Async &#x51FD;&#x6570;</a>
+</li>
+<li><a href="https://www.zhihu.com/question/25413141" target="_blank" rel="external">&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x7528;&#x7684;&#x77E5;&#x4E4E;&#x56DE;&#x7B54;</a>
+</li>
+<li><a href="https://www.zhihu.com/question/25413141/answer/71934118#" target="_blank" rel="external">&#x5982;&#x4F55;&#x5728; coffee &#x91CC;&#x5B9E;&#x73B0;&#x975E;&#x963B;&#x585E;&#x540C;&#x6B65;</a>
+<ul class="org-ul">
+<li>CoffeeScript &#x5199;&#x7684;&#x975E;&#x5E38;&#x7B80;&#x6D01;&#xFF0C;&#x597D;&#x611F;&#x5EA6;+1
+</li>
+<li>&#x4F46;&#x662F;&#xFF0C;&#x719F;&#x7EC3;&#x8FD9;&#x4E2A;&#x7528;&#x6CD5;&#x5FC5;&#x987B;&#x5403;&#x901A; Promise &#x548C; co&#xFF0C;&#x5EFA;&#x8BAE;&#x4ECE; <a href="http://es6.ruanyifeng.com/#docs/async" target="_blank" rel="external">&#x962E;&#x4E00;&#x5CF0;&#x7684;&#x5206;&#x4EAB;</a> &#x5F00;&#x59CB;
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> &#x5982;&#x4F55;&#x5728; Hubot &#x91CC;&#x4F7F;&#x7528; ES6</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Problems
+</p>
+
+<ol class="org-ol">
+<li>CoffeeScript &#x9ED8;&#x8BA4;&#x4E0D;&#x5F00;&#x542F; ES6
+</li>
+<li>Hubot &#x4F7F;&#x7528;&#x7684; CoffeeScript &#x7248;&#x672C;&#x6BD4;&#x8F83;&#x8001;&#xFF0C;&#x4E0D;&#x652F;&#x6301; ES6 &#x7279;&#x6027;
+</li>
+</ol>
+
+<p>
+Solutions
+</p>
+
+<ol class="org-ol">
+<li>coffee &#x2013;nodejs &#x2013;harmony <i>file</i>
+</li>
+<li>&#x4E24;&#x6B65;
+<ol class="org-ol">
+<li>&#x5347;&#x7EA7; Hubot &#x4F9D;&#x8D56;&#x7684; CoffeeScript, &#x6700;&#x65B0;&#x7248;&#x5373;&#x53EF;
+</li>
+<li>&#x4FEE;&#x6539; <code>./bin/hubot</code>, &#x6DFB;&#x52A0; <code>--harmony</code> flag
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Case Bot &#x7684;&#x5386;&#x7A0B;</h3>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> TODOs &#x548C;&#x6700;&#x8FD1;&#x7684;&#x5174;&#x8DA3;&#x70B9;</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>&#x5B8C;&#x5584;&#x529F;&#x80FD;
+</li>
+<li>&#x8FD8;&#x662F;&#x60F3;&#x5199;&#x4E00;&#x5957;&#x6709;&#x5F15;&#x5BFC;&#xFF0C;&#x6709;&#x9884;&#x7F6E;&#x9009;&#x9879;&#x7684;&#x524D;&#x7AEF;&#x9875;&#x9762;&#x7ED9;&#x4EBA;&#x7528;&#xFF0C;&#x6700;&#x5C0F;&#x5316;&#x7528;&#x6237;&#x7684;&#x5B66;&#x4E60;&#x6210;&#x672C;
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> &#x4E00;&#x4E9B;&#x6709;&#x610F;&#x601D;&#x7684;&#x8D44;&#x6599;</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li><a href="https://twitter.com/brandonmartinez/status/301453485407342592" target="_blank" rel="external">How to pronouce Hubot?</a>
+</li>
+</ul>
+</div>
+</div>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/17/my-hubot/" data-id="cipj8kudq0000x74zpstxnsyi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hubot/">hubot</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DevOPS/">DevOPS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hubot/">hubot</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/hubot/" style="font-size: 10px;">hubot</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/17/my-hubot/">Hubot 初步研究</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Yiguang Lu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
